@@ -7,10 +7,10 @@ It reads `PoseWithCovarianceStamped` messages, computes the **covariance trace**
 ## Score formula
 
 ```
-score = min(100, ref_cov / mean_trace × 100)
+score = min(100, ref_cov / max_trace × 100)
 ```
 
-The score is directly proportional to `1 / mean_trace` — tighter covariance → higher score.  
+The score is driven by the **worst-case pose**: a single covariance spike drags the whole trajectory score down.  
 `ref_cov` (default `1e-3`) is the covariance trace that maps to a perfect score of 100; tune it to your hardware.
 
 | Score  | Quality   |

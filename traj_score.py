@@ -70,7 +70,8 @@ def compute_stats(traces: list, ref_cov: float) -> dict:
     mean = sum(traces) / n
     std = math.sqrt(sum((x - mean) ** 2 for x in traces) / n)
     s = sorted(traces)
-    score = min(100.0, ref_cov / mean * 100.0)
+    # score driven by worst-case pose: one covariance spike tanks the whole trajectory
+    score = min(100.0, ref_cov / s[-1] * 100.0)
     return {
         "n_poses":    n,
         "mean_trace": mean,
@@ -151,7 +152,7 @@ def print_report(stats: dict, bag_path: str, topic: str) -> None:
     print(f"  p99  cov trace   : {stats['p99_trace']:.6e}")
     print("-" * W)
     print(f"  Reference cov    : {stats['ref_cov']:.6e}  (= score 100)")
-    print(f"  Score            : {stats['score']:.1f} / 100  [{stats['quality']}]")
+    print(f"  Score            : {stats['score']:.1f} / 100  [{stats['quality']}]  (driven by max trace)")
     print("=" * W)
 
 
