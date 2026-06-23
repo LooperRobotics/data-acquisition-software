@@ -1,0 +1,19 @@
+# Python build artifacts
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+UNKNOWN.egg-info/
+build/
+dist/
+
+# ROS2 bag files
+rosbag2_*/
+*.db3
+*.yaml
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store

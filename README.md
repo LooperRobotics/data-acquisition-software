@@ -94,7 +94,7 @@ traj_score /path/to/bag --verbose
   p99  cov trace   : 1.234567e-03
 ------------------------------------------------------
   Reference cov    : 1.000000e-03  (= score 100)
-  Score            : 100.0 / 100  [Excellent]
+  Score            : 68.3 / 100  [Good]  (driven by max trace)
 ======================================================
 ```
 
