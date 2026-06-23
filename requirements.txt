@@ -1,0 +1,9 @@
+# ROS2 runtime dependencies — install via the ROS2 distribution, not pip:
+#   source /opt/ros/humble/setup.bash
+#
+#   rosbag2_py
+#   rclpy
+#   rosidl_runtime_py
+#
+# All Python standard-library modules used (argparse, json, math, sys, pathlib)
+# are included with Python >= 3.10 and require no additional installation.

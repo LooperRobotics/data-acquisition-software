@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "traj_score"
+version = "0.1.0"
+description = "Trajectory quality evaluator for VIO/SLAM systems using covariance trace"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+keywords = ["vio", "slam", "trajectory", "ros2", "covariance", "evaluation"]
+
+# ROS2 packages (rosbag2_py, rclpy, rosidl_runtime_py) are installed by
+# sourcing the ROS2 workspace — they are not pip-installable.
+dependencies = []
+
+[project.scripts]
+traj_score = "traj_score:main"
+
+[tool.setuptools]
+py-modules = ["traj_score"]
