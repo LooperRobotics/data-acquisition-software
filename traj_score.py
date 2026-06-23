@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """
 traj_score — trajectory quality evaluator for VIO / SLAM systems.
 
