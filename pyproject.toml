@@ -15,8 +15,5 @@ keywords = ["vio", "slam", "trajectory", "ros2", "covariance", "evaluation"]
 # sourcing the ROS2 workspace — they are not pip-installable.
 dependencies = []
 
-[project.scripts]
-traj_score = "traj_score:main"
-
 [tool.setuptools]
 py-modules = ["traj_score"]

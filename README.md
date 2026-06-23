@@ -34,22 +34,25 @@ source /opt/ros/humble/setup.bash
 ```bash
 git clone https://github.com/xinghanDM/traj_score.git
 cd traj_score
-/usr/bin/python3 -m pip install -e .
+chmod +x traj_score.py
 ```
 
-> **Important:** use `/usr/bin/python3` (system Python 3.10), not `pip` or
-> `python3` from a conda/venv environment.  
-> `rosbag2_py` C extensions are compiled against Python 3.10 and will fail
-> with any other interpreter.
+> **Important:** `rosbag2_py` C extensions are compiled for the system
+> Python 3.10 (`/usr/bin/python3`). Do **not** run with a conda or venv
+> interpreter — the script shebang (`#!/usr/bin/python3`) handles this
+> automatically.
 
-If you previously installed with conda's pip, remove it first:
+### Optional: make `traj_score` available system-wide
+
+```bash
+sudo ln -sf "$(pwd)/traj_score.py" /usr/local/bin/traj_score
+```
+
+If you previously installed with pip, remove that entry point first:
 
 ```bash
 pip uninstall traj_score -y
-/usr/bin/python3 -m pip install -e .
 ```
-
-After installation the `traj_score` command is available in any terminal where the ROS2 workspace is sourced.
 
 ## Usage
 
