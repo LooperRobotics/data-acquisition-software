@@ -73,6 +73,15 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="List all topics in the bag and exit.",
     )
+    p.add_argument(
+        "--ref-cov", "-r",
+        type=float,
+        default=1e-3,
+        help=(
+            "Reference covariance trace that maps to a score of 100 "
+            "(default: 1e-3).  Tune this to your system's expected best-case trace."
+        ),
+    )
     return p.parse_args()
 
 
@@ -122,7 +131,6 @@ def main() -> None:
     n = len(traces)
     print()
     print("=" * 50)
-    print(f"  Messages processed : {n}")
 
     if n == 0:
         print("  No messages found on this topic.")
@@ -132,9 +140,15 @@ def main() -> None:
     min_t = min(traces)
     max_t = max(traces)
 
-    print(f"  Avg cov trace (score) : {avg:.6e}  (lower is better)")
-    print(f"  Min cov trace         : {min_t:.6e}")
-    print(f"  Max cov trace         : {max_t:.6e}")
+    # score ∝ 1/avg_cov, clamped to [0, 100]
+    score = min(100.0, args.ref_cov / avg * 100.0)
+
+    print(f"  Poses processed   : {n}")
+    print(f"  Avg cov trace     : {avg:.6e}  (lower is better)")
+    print(f"  Min cov trace     : {min_t:.6e}")
+    print(f"  Max cov trace     : {max_t:.6e}")
+    print(f"  Reference cov     : {args.ref_cov:.6e}  (score = 100)")
+    print(f"  Trajectory score  : {score:.1f} / 100")
     print("=" * 50)
 
 
