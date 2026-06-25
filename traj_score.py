@@ -29,7 +29,7 @@ import rosbag2_py
 from rclpy.serialization import deserialize_message
 from rosidl_runtime_py.utilities import get_message
 
-from core import DEFAULT_TOPIC, DEFAULT_REF_COV, covariance_trace, compute_stats, print_report
+from core.traj_core import DEFAULT_TOPIC, DEFAULT_REF_COV, covariance_trace, compute_stats, print_report
 
 
 def open_reader(bag_path: str, topic: str) -> rosbag2_py.SequentialReader:

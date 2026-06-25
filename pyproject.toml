@@ -16,4 +16,5 @@ keywords = ["vio", "slam", "trajectory", "ros2", "covariance", "evaluation"]
 dependencies = []
 
 [tool.setuptools]
-py-modules = ["traj_score", "core"]
+packages = [{include = "core"}]
+py-modules = ["traj_score"]
