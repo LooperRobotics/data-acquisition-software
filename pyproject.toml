@@ -17,4 +17,3 @@ dependencies = []
 
 [tool.setuptools]
 packages = [{include = "core"}]
-py-modules = ["traj_score"]
