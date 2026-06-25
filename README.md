@@ -20,38 +20,74 @@ The score is driven by the **worst-case pose**: a single covariance spike drags 
 | 50–69  | Fair      |
 | 0–49   | Poor      |
 
+## Project structure
+
+```
+core/
+    traj_score.py   # main script: scoring logic + ROS2 bag I/O + CLI
+scripts/
+    build_container.sh  # build image and recreate the container
+Dockerfile
+entrypoint.sh
+```
+
 ## Requirements
 
-- ROS2 Humble (or later)
+- ROS2 Humble
 - Python ≥ 3.10
 
+## Quick start (Docker — recommended)
+
+Docker is the easiest way to run `traj_score` without installing ROS2 locally.
+
 ```bash
+git clone https://github.com/LooperRobotics/data-acquisition-software.git
+cd data-acquisition-software
+
+# Build image and create a persistent container
+# BAG_DIR defaults to ~/bags — override to point at your bag directory
+BAG_DIR=/path/to/your/bags bash scripts/build_container.sh
+```
+
+Run against a bag:
+
+```bash
+docker exec data-acquisition traj_score /data-acquisition/<bag_name>
+```
+
+Open an interactive shell inside the container:
+
+```bash
+docker exec -it data-acquisition bash
+```
+
+To update the container after a code change, re-run `build_container.sh` — it rebuilds the image and recreates the container automatically.
+
+```bash
+# Run evaluation
+docker exec data-acquisition traj_score /data-acquisition/my_bag
+
+# Open a shell
+docker exec -it data-acquisition bash
+```
+
+## Native installation (ROS2 already installed)
+
+```bash
+git clone https://github.com/LooperRobotics/data-acquisition-software.git
+cd data-acquisition-software
 source /opt/ros/humble/setup.bash
+chmod +x core/traj_score.py
 ```
 
-## Installation
+> **Important:** `rosbag2_py` C extensions are compiled for the system Python 3.10
+> (`/usr/bin/python3`). Do **not** run with a conda or venv interpreter — the
+> script shebang (`#!/usr/bin/python3`) handles this automatically.
+
+Make `traj_score` available system-wide:
 
 ```bash
-git clone https://github.com/xinghanDM/traj_score.git
-cd traj_score
-chmod +x traj_score.py
-```
-
-> **Important:** `rosbag2_py` C extensions are compiled for the system
-> Python 3.10 (`/usr/bin/python3`). Do **not** run with a conda or venv
-> interpreter — the script shebang (`#!/usr/bin/python3`) handles this
-> automatically.
-
-### Optional: make `traj_score` available system-wide
-
-```bash
-sudo ln -sf "$(pwd)/traj_score.py" /usr/local/bin/traj_score
-```
-
-If you previously installed with pip, remove that entry point first:
-
-```bash
-pip uninstall traj_score -y
+sudo ln -sf "$(pwd)/core/traj_score.py" /usr/local/bin/traj_score
 ```
 
 ## Usage

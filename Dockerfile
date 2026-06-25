@@ -38,7 +38,7 @@ RUN if getent group "${USER_GID}" >/dev/null; then \
 
 RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> /home/${USERNAME}/.bashrc
 
-WORKDIR /workspaces/traj_score
+WORKDIR /workspaces/data-acquisition
 COPY --chown=${USERNAME}:${USERNAME} core/ core/
 COPY --chown=${USERNAME}:${USERNAME} entrypoint.sh /entrypoint.sh
 RUN chmod +x core/traj_score.py /entrypoint.sh \
