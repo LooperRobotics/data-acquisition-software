@@ -1,5 +1,5 @@
 ARG ROS_DISTRO=humble
-FROM osrf/ros:${ROS_DISTRO}-ros-base
+FROM ros:${ROS_DISTRO}-ros-base
 
 SHELL ["/bin/bash", "-lc"]
 
