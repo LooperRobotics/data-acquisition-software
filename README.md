@@ -52,16 +52,24 @@ BAG_DIR=/path/to/your/bags bash scripts/build_container.sh
 Run against a bag:
 
 ```bash
-docker exec traj_score traj_score /bags/<bag_name>
+docker exec data-acquisition traj_score /data-acquisition/<bag_name>
 ```
 
 Open an interactive shell inside the container:
 
 ```bash
-docker exec -it traj_score bash
+docker exec -it data-acquisition bash
 ```
 
 To update the container after a code change, re-run `build_container.sh` — it rebuilds the image and recreates the container automatically.
+
+```bash
+# Run evaluation
+docker exec data-acquisition traj_score /data-acquisition/my_bag
+
+# Open a shell
+docker exec -it data-acquisition bash
+```
 
 ## Native installation (ROS2 already installed)
 
