@@ -41,7 +41,8 @@ RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> /home/${USERNAME}/.bashrc
 WORKDIR /workspaces/traj_score
 COPY --chown=${USERNAME}:${USERNAME} core/ core/
 COPY --chown=${USERNAME}:${USERNAME} entrypoint.sh /entrypoint.sh
-RUN chmod +x core/traj_score.py /entrypoint.sh
+RUN chmod +x core/traj_score.py /entrypoint.sh \
+ && ln -sf /entrypoint.sh /usr/local/bin/traj_score
 
 USER ${USERNAME}
 
