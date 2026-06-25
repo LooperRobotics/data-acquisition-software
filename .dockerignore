@@ -1,0 +1,10 @@
+.git
+.claude
+__pycache__
+*.py[cod]
+*.egg-info
+build/
+dist/
+rosbag2_*/
+*.db3
+*.yaml
